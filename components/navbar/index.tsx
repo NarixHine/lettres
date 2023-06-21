@@ -3,11 +3,10 @@
 import { Box, Collapse, Flex, Icon, IconButton, Stack, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import Link from '../link'
+import Image from '../image'
 import { Anton } from 'next/font/google'
 import { UserButton, useAuth } from '@clerk/nextjs'
 import { CiLogin } from 'react-icons/ci'
-import Image from 'next/image'
-import Logo from '@/public/logo.png'
 
 const anto = Anton({ subsets: ['latin'], weight: '400' })
 
@@ -51,7 +50,7 @@ export default function WithSubnavigation() {
     const { userId } = useAuth()
 
     return (
-        <Box>
+        <Box position={'sticky'} top={0} zIndex={999} opacity={0.9}>
             <Flex
                 bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
@@ -81,7 +80,7 @@ export default function WithSubnavigation() {
                         fontSize={28}
                         color='rgba(31,78,121,0.8)'
                         className={anto.className}>
-                        <Image src={Logo} alt='Lettres Logo' height={30} style={{ display: 'inline', marginRight: 10, marginBottom: 5 }}></Image>
+                        <Image src={'/logo.png'} alt='Logo' height={30} style={{ display: 'inline', marginRight: 10, marginBottom: 5 }}></Image>
                         Lettres
                     </Text>
                 </Flex>
