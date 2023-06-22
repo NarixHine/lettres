@@ -7,7 +7,7 @@ import Image from '../image'
 import { UserButton, useAuth } from '@clerk/nextjs'
 import { CiLogin } from 'react-icons/ci'
 import { useRouter } from 'next/navigation'
-import { anto, raleway } from '@/utils/fonts'
+import { anto, raleway } from '@/lib/fonts'
 import { dark } from '@clerk/themes'
 
 interface NavItem {
@@ -24,6 +24,10 @@ const NAV_ITEMS: Array<NavItem> = [
     {
         label: 'Explore',
         children: [
+            {
+                label: 'Archive',
+                href: '#',
+            },
             {
                 label: 'Ask AI',
                 href: '#',

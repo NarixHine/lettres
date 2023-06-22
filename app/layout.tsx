@@ -1,4 +1,4 @@
-import { noto } from '@/utils/fonts'
+import { noto } from '@/lib/fonts'
 import './globals.css'
 import { Providers } from './providers'
 import Navbar from '@/components/navbar'

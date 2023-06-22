@@ -1,9 +1,10 @@
 'use client'
 
 import CMS from '@/components/cms'
-import theme from '@/utils/theme'
+import theme from '@/lib/theme'
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
+import { Provider } from 'react-wrap-balancer'
 
 export function Providers({ children }: {
     children: React.ReactNode
@@ -11,8 +12,8 @@ export function Providers({ children }: {
     return (
         <CacheProvider>
             <ChakraProvider theme={theme}>
-            <CMS></CMS>
-                {children}
+                <CMS></CMS>
+                <Provider>{children}</Provider>
             </ChakraProvider>
         </CacheProvider>
     )

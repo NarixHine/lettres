@@ -1,6 +1,6 @@
 'use client'
 
-import { raleway } from '@/utils/fonts'
+import { raleway } from '@/lib/fonts'
 import { useColorMode } from '@chakra-ui/react'
 import { UserProfile } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
