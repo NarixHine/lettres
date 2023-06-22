@@ -1,5 +1,7 @@
 'use client'
 
+import CMS from '@/components/cms'
+import theme from '@/utils/theme'
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -8,7 +10,8 @@ export function Providers({ children }: {
 }) {
     return (
         <CacheProvider>
-            <ChakraProvider>
+            <ChakraProvider theme={theme}>
+            <CMS></CMS>
                 {children}
             </ChakraProvider>
         </CacheProvider>

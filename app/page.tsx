@@ -8,24 +8,23 @@ export default function Home() {
     <Main>
       <Box
         backgroundSize={'100% 20px'}
-        boxShadow={'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px'}
         overflow={'hidden'}
         width={'100vw'}
         height={'40vh'}
-        position={'relative'}
-        animation={'fadeIn 1s'}>
+        position={'relative'}>
         <NextImage style={{ objectFit: 'cover', objectPosition: '50% 35%' }} src='/c.jpg' fill={true} alt='Cover'></NextImage>
       </Box>
       <Box position={'relative'}>
         <Image
           src={'/logo2.png'}
           alt='Logo'
-          width={70}
+          width={50}
           position={'absolute'}
-          top={-50}
+          top={-25}
           left={'50%'}
           transform={'translate(-50%, 0)'}
           animation={'fadeIn 2s'}
+          style={{ animationFillMode: 'forwards' }}
         ></Image>
       </Box>
     </Main>

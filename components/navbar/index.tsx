@@ -1,14 +1,14 @@
 'use client'
 
-import { Box, Collapse, Flex, Icon, IconButton, Stack, Text, useColorModeValue, useDisclosure } from '@chakra-ui/react'
+import { Box, Collapse, Flex, Icon, IconButton, Stack, Text, useColorMode, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import Link from '../link'
 import Image from '../image'
-import { Anton } from 'next/font/google'
 import { UserButton, useAuth } from '@clerk/nextjs'
 import { CiLogin } from 'react-icons/ci'
-
-const anto = Anton({ subsets: ['latin'], weight: '400' })
+import { useRouter } from 'next/navigation'
+import { anto, raleway } from '@/utils/fonts'
+import { dark } from '@clerk/themes'
 
 interface NavItem {
     label: string
@@ -48,11 +48,12 @@ const NAV_ITEMS: Array<NavItem> = [
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
     const { userId } = useAuth()
+    const { colorMode } = useColorMode()
+    const router = useRouter()
 
     return (
-        <Box position={'sticky'} top={0} zIndex={999} opacity={0.9}>
+        <Box position={'sticky'} top={0} zIndex={999} opacity={0.9} backdropFilter={'blur(5px)'}>
             <Flex
-                bg={useColorModeValue('white', 'gray.800')}
                 color={useColorModeValue('gray.600', 'white')}
                 minH={'60px'}
                 py={{ base: 2 }}
@@ -74,15 +75,17 @@ export default function WithSubnavigation() {
                         aria-label={'Toggle Navigation'}
                     />
                 </Flex>
-                <Flex flex={{ base: 1 }} justify='center' pb={2}>
-                    <Text
+                <Flex flex={{ base: 1 }} justify='center'>
+                    <Link
+                        href='/'
+                        _hover={{ textDecoration: 'none' }}
                         textAlign='center'
-                        fontSize={28}
+                        fontSize={30}
                         color='rgba(31,78,121,0.8)'
                         className={anto.className}>
                         <Image src={'/logo.png'} alt='Logo' height={30} style={{ display: 'inline', marginRight: 10, marginBottom: 5 }}></Image>
                         Lettres
-                    </Text>
+                    </Link>
                 </Flex>
 
                 <Flex
@@ -91,8 +94,12 @@ export default function WithSubnavigation() {
                     direction={'row'}>
                     {
                         userId ?
-                            <UserButton afterSignOutUrl='/' /> :
-                            <IconButton icon={<Icon as={CiLogin}></Icon>} aria-label='Sign In'></IconButton>
+                            <UserButton
+                                userProfileMode='navigation'
+                                userProfileUrl='/profile'
+                                appearance={{ variables: { fontFamily: raleway.style.fontFamily }, baseTheme: colorMode === 'dark' ? dark : undefined }}
+                                afterSignOutUrl='/' /> :
+                            <IconButton onClick={() => router.push('/auth/signin')} variant={'ghost'} icon={<Icon as={CiLogin}></Icon>} aria-label='Sign In'></IconButton>
                     }
                 </Flex>
             </Flex>
