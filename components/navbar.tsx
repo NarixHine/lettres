@@ -2,12 +2,12 @@
 
 import { Box, Collapse, Flex, Icon, IconButton, Stack, Text, useColorMode, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import { ChevronDownIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
-import Link from '../link'
-import Image from '../image'
+import Link from './chakra/link'
+import Image from './chakra/image'
 import { UserButton, useAuth } from '@clerk/nextjs'
 import { CiLogin } from 'react-icons/ci'
 import { useRouter } from 'next/navigation'
-import { anto, raleway } from '@/lib/fonts'
+import { anto } from '@/lib/fonts'
 import { dark } from '@clerk/themes'
 
 interface NavItem {
@@ -101,7 +101,7 @@ export default function WithSubnavigation() {
                             <UserButton
                                 userProfileMode='navigation'
                                 userProfileUrl='/profile'
-                                appearance={{ variables: { fontFamily: raleway.style.fontFamily }, baseTheme: colorMode === 'dark' ? dark : undefined }}
+                                appearance={{ baseTheme: colorMode === 'dark' ? dark : undefined }}
                                 afterSignOutUrl='/' /> :
                             <IconButton onClick={() => router.push('/auth/signin')} variant={'ghost'} icon={<Icon as={CiLogin}></Icon>} aria-label='Sign In'></IconButton>
                     }

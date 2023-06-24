@@ -1,8 +1,9 @@
-import { noto } from '@/lib/fonts'
+import { noto, raleway } from '@/lib/fonts'
 import './globals.css'
 import { Providers } from './providers'
 import Navbar from '@/components/navbar'
 import { ClerkProvider } from '@clerk/nextjs'
+import Footer from '@/components/footer'
 
 
 export const metadata = {
@@ -17,10 +18,13 @@ export default function RootLayout({
   return (
     <html lang='zh-CN'>
       <ClerkProvider>
-        <body className={noto.className}>
+        <body style={{ fontFamily: `${raleway.style.fontFamily}, ${noto.style.fontFamily}` }}>
           <Providers>
             <Navbar></Navbar>
+
             {children}
+
+            <Footer></Footer>
           </Providers>
         </body>
       </ClerkProvider>

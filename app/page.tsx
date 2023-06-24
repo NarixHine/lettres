@@ -1,15 +1,15 @@
-import Box from '@/components/box'
+import Box from '@/components/chakra/box'
 import Main from '@/components/main'
 import NextImage from 'next/image'
-import Image from '@/components/image'
-import Text from '@/components/text'
-import SlideFade from '@/components/slidefade'
-import { dancing, raleway } from '@/lib/fonts'
+import Image from '@/components/chakra/image'
+import Text from '@/components/chakra/text'
+import SlideFade from '@/components/chakra/slidefade'
+import { dancing } from '@/lib/fonts'
 import { Balancer } from 'react-wrap-balancer'
-import Divider from '@/components/divider'
-import Heading from '@/components/heading'
-import { useColorModeValue } from '@chakra-ui/react'
+import Heading from '@/components/chakra/heading'
 import HomeDescription from './description'
+import Lettres from '@/components/lettres'
+import Stack from '@/components/chakra/stack'
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
         height={'50vh'}
         position={'relative'}
         borderRadius={30}>
-        <NextImage style={{ objectFit: 'cover', objectPosition: '50% 3%' }} src='/c.jpg' fill={true} alt='Cover'></NextImage>
+        <NextImage priority style={{ objectFit: 'cover', objectPosition: '50% 5%' }} src='/c.jpg' fill={true} alt='Cover'></NextImage>
         <Text
           top={'50%'}
           left={'50%'}
@@ -70,8 +70,18 @@ export default function Home() {
       </Box>
 
       <br></br>
-      <Heading>Featured</Heading>
+      <Heading textAlign={'center'}>Featured</Heading>
 
+      <br></br>
+      <Stack width={'90%'} m={'0 auto'} spacing={3}>
+        <Lettres
+          width='100%'
+          tags={['hello', 'world']}
+          id=''
+          title='Lorem ipsom'
+          img='/c.jpg'
+          desc='Quisque varius bibendum arcu id lobortis. Mauris lobortis metus at quam bibendum vehicula. Aenean ut ante eu odio blandit venenatis. In efficitur venenatis ante eget imperdiet.'></Lettres>
+      </Stack>
     </Main>
   )
 }
