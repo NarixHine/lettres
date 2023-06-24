@@ -1,4 +1,4 @@
-import Center from '@/components/center'
+import Center from '@/components/chakra/center'
 
 export default function AuthLayout({
     children,
