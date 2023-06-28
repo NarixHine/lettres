@@ -11,7 +11,7 @@ export default function Footer() {
                     <Image src={'/logo.png'} alt='Logo' height={10}></Image>
                 </AbsoluteCenter>
             </Box>
-            <Text textAlign={'center'} fontStyle={'italic'} opacity={0.6} fontSize={'sm'} my={5}>All rights reserved.</Text>
+            <Text textAlign={'center'} fontStyle={'italic'} opacity={0.6} fontSize={'sm'} my={5}>Correction & sharing are appreciated.</Text>
         </>
     )
 }

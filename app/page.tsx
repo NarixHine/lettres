@@ -4,7 +4,7 @@ import NextImage from 'next/image'
 import Image from '@/components/chakra/image'
 import Text from '@/components/chakra/text'
 import SlideFade from '@/components/chakra/slidefade'
-import { dancing } from '@/lib/fonts'
+import { dancing, noto } from '@/lib/fonts'
 import { Balancer } from 'react-wrap-balancer'
 import Heading from '@/components/chakra/heading'
 import HomeDescription from './description'
@@ -53,16 +53,18 @@ export default function Home() {
 
         <Text
           top={5}
-          left={0}
+          left={5}
           position={'absolute'}
-          fontSize={30}>
+          fontSize={30}
+          className={noto.className}>
           “
         </Text>
         <Text
-          bottom={-30}
-          right={0}
+          bottom={-10}
+          right={5}
           position={'absolute'}
-          fontSize={30}>
+          fontSize={30}
+          className={noto.className}>
           ”
         </Text>
         <br></br><br></br>
