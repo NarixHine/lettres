@@ -29,10 +29,6 @@ const NAV_ITEMS: Array<NavItem> = [
                 href: '#',
             },
             {
-                label: 'Ask AI',
-                href: '#',
-            },
-            {
                 label: 'Search',
                 href: '#',
             },
@@ -49,7 +45,10 @@ const NAV_ITEMS: Array<NavItem> = [
     }
 ]
 
-export default function WithSubnavigation() {
+export default function Navbar({ logo, title }: {
+    logo: string,
+    title: string
+}) {
     const { isOpen, onToggle } = useDisclosure()
     const { userId } = useAuth()
     const { colorMode } = useColorMode()
@@ -87,8 +86,8 @@ export default function WithSubnavigation() {
                         fontSize={30}
                         color='rgba(31,78,121,0.8)'
                         className={anto.className}>
-                        <Image src={'/logo.png'} alt='Logo' height={30} style={{ display: 'inline', marginRight: 10, marginBottom: 5 }}></Image>
-                        Lettres
+                        <Image src={logo} alt='Logo' height={30} style={{ display: 'inline', marginRight: 10, marginBottom: 5 }}></Image>
+                        {title}
                     </Link>
                 </Flex>
 
