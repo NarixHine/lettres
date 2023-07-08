@@ -1,3 +1,5 @@
+'use client'
+
 import NextLink from 'next/link'
 import { Link as ChakraLink, LinkProps } from '@chakra-ui/react'
 import { JSX, DetailedHTMLProps, AnchorHTMLAttributes } from 'react'

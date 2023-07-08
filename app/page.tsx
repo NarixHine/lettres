@@ -10,6 +10,7 @@ import Heading from '@/components/chakra/heading'
 import HomeDescription from './description'
 import Lettres from '@/components/lettres'
 import Stack from '@/components/chakra/stack'
+import Link from '@/components/chakra/link'
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ export default function Home() {
           className={dancing.className}
           fontSize={50}>
           <Balancer>
-            Presented by Narix Hine
+            A Narix Hine Present
           </Balancer>
         </Text>
       </Box>
@@ -84,6 +85,12 @@ export default function Home() {
           img='/c.jpg'
           desc='Quisque varius bibendum arcu id lobortis. Mauris lobortis metus at quam bibendum vehicula. Aenean ut ante eu odio blandit venenatis. In efficitur venenatis ante eget imperdiet.'></Lettres>
       </Stack>
+
+      <br></br><br></br>
+      <Box p={5} style={{ boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }}>
+        <Heading textAlign={'center'} size={'lg'} fontWeight={'medium'} color={'teal.500'}><Link href='https://misskey.cloud/@lettres' target='_blank'>Misskey ⧉</Link></Heading>
+        <iframe src='https://missbed.narix.link/timeboard/misskey.cloud/9gwc5sdvr8' className='mx-auto my-6 h-64 w-4/5 p-5' style={{ boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px' }}></iframe>
+      </Box>
     </Main>
   )
 }
