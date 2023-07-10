@@ -4,15 +4,42 @@ import NextImage from 'next/image'
 import Image from '@/components/chakra/image'
 import Text from '@/components/chakra/text'
 import SlideFade from '@/components/chakra/slidefade'
-import { dancing, noto } from '@/lib/fonts'
+import { dancing, noto } from '@/src/fonts'
 import { Balancer } from 'react-wrap-balancer'
 import Heading from '@/components/chakra/heading'
-import HomeDescription from './description'
 import Lettres from '@/components/lettres'
 import Stack from '@/components/chakra/stack'
 import Link from '@/components/chakra/link'
+import { getXataClient } from '@/src/xata'
+import { kv } from '@vercel/kv'
+import HomeDesc from './description'
 
-export default function Home() {
+async function getData() {
+  const client = getXataClient()
+  const [floatingLogo, slogan, cover, desc] = await Promise.all([
+    kv.get('floating_logo'),
+    kv.get('slogan'),
+    kv.get('cover'),
+    kv.get('desc'),
+  ]) as string[]
+  const lettres = await client
+    .db
+    .lettres
+    .select(['id', 'desc', 'title', 'tags', 'cover', 'xata.createdAt'])
+    .filter({ pin: true })
+    .getMany()
+  return {
+    floatingLogo,
+    slogan,
+    cover,
+    desc,
+    lettres
+  }
+}
+
+export default async function Home() {
+  const { cover, slogan, floatingLogo, lettres, desc } = await getData()
+
   return (
     <Main>
       <Box
@@ -20,7 +47,7 @@ export default function Home() {
         height={'50vh'}
         position={'relative'}
         borderRadius={30}>
-        <NextImage priority style={{ objectFit: 'cover', objectPosition: '50% 5%' }} src='/c.jpg' fill={true} alt='Cover'></NextImage>
+        <NextImage priority style={{ objectFit: 'cover', objectPosition: '50% 5%' }} src={cover} fill={true} alt='Cover'></NextImage>
         <Text
           top={'50%'}
           left={'50%'}
@@ -33,16 +60,15 @@ export default function Home() {
           className={dancing.className}
           fontSize={50}>
           <Balancer>
-            A Narix Hine Present
+            {slogan}
           </Balancer>
         </Text>
       </Box>
 
-
       <Box position={'relative'}>
         <SlideFade in offsetY={10}>
           <Image
-            src={'/logo2.png'}
+            src={floatingLogo}
             alt='Logo'
             width={50}
             position={'absolute'}
@@ -69,28 +95,33 @@ export default function Home() {
           ”
         </Text>
         <br></br><br></br>
-        <HomeDescription></HomeDescription>
+        <HomeDesc desc={desc} />
       </Box>
 
       <br></br>
       <Heading textAlign={'center'}>Featured</Heading>
 
       <br></br>
-      <Stack width={'90%'} m={'0 auto'} spacing={3}>
-        <Lettres
-          width='100%'
-          tags={['hello', 'world']}
-          id=''
-          title='Lorem ipsom'
-          img='/c.jpg'
-          desc='Quisque varius bibendum arcu id lobortis. Mauris lobortis metus at quam bibendum vehicula. Aenean ut ante eu odio blandit venenatis. In efficitur venenatis ante eget imperdiet.'></Lettres>
-      </Stack>
+      <Stack width={'90%'} m={'0 auto'} spacing={10}>{
+        lettres.map(({ id, title, desc, tags, cover, xata }) => (
+          <Lettres
+            key={id}
+            width='100%'
+            tags={tags}
+            id={id}
+            title={title}
+            cover={cover}
+            desc={desc}
+            date={xata.createdAt}
+          />
+        ))
+      }</Stack>
 
       <br></br><br></br>
       <Box p={5} style={{ boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }}>
-        <Heading textAlign={'center'} size={'lg'} fontWeight={'medium'} color={'teal.500'}><Link href='https://misskey.cloud/@lettres' target='_blank'>Misskey ⧉</Link></Heading>
+        <Text textAlign={'center'} fontSize={'2xl'} color={'teal.500'}><Link href='https://misskey.cloud/@lettres' target='_blank'>Misskey ⧉</Link></Text>
         <iframe src='https://missbed.narix.link/timeboard/misskey.cloud/9gwc5sdvr8' className='mx-auto my-6 h-64 w-4/5 p-5' style={{ boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px' }}></iframe>
       </Box>
-    </Main>
+    </Main >
   )
 }

@@ -2,16 +2,18 @@
 
 import { useState } from 'react'
 import { Box, Heading, Text, Img, Flex, Center, useColorModeValue, HStack, ResponsiveValue, } from '@chakra-ui/react'
-import { BsArrowUpRight, BsHeartFill, BsHeart } from 'react-icons/bs'
+import { BiLinkExternal } from 'react-icons/bi'
+import { ImEnter } from 'react-icons/im'
 import { useRouter } from 'next/navigation'
 import Link from './chakra/link'
 
-export default function Lettres({ img, title, desc, id, tags, width }: {
-    img: string,
+export default function Lettres({ cover, title, desc, id, tags, width, date }: {
+    cover: string | null | undefined,
     title: string,
-    desc: string,
+    desc: string | null | undefined,
     id: string,
-    tags: string[],
+    tags: string[] | null | undefined,
+    date: Date,
     width: ResponsiveValue<number | (string & {})>
 }) {
     const [liked, setLiked] = useState(false)
@@ -27,24 +29,27 @@ export default function Lettres({ img, title, desc, id, tags, width }: {
                 border={'1px'}
                 borderColor='black'
                 boxShadow={useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan')}>
-                <Box h={'200px'} borderBottom={'1px'} borderColor='black'>
-                    <Img
-                        src={img}
-                        roundedTop={'sm'}
-                        objectFit='cover'
-                        h='full'
-                        w='full'
-                        alt={'Blog Image'}
-                    />
-                </Box>
+                {
+                    cover ? <Box h={'200px'} borderBottom={'1px'} borderColor='black'>
+                        <Img
+                            src={cover}
+                            roundedTop={'sm'}
+                            objectFit='cover'
+                            h='full'
+                            w='full'
+                            alt={'Blog Image'}
+                        />
+                    </Box> : <></>
+                }
                 <Box p={4} pb={3}>
-                    <Heading color={'black'} fontSize={'2xl'} noOfLines={1}>
+                    <Heading color={'black'} fontSize={'2xl'} noOfLines={1} display={'inline'}>
                         {title}
                     </Heading>
-                    <Text color={'gray.500'} noOfLines={5} my={1}>
+                    <Text as='sup' color={'gray.600'} mx={2}>{date.toDateString()}</Text>
+                    <Text noOfLines={5} my={1}>
                         {desc}
                     </Text>
-                    {tags.map((tag) => (
+                    {(tags ?? []).map((tag) => (
                         <Box
                             key={tag}
                             bg='black'
@@ -73,21 +78,19 @@ export default function Lettres({ img, title, desc, id, tags, width }: {
                         <Text fontSize={'md'} fontWeight={'semibold'}>
                             View the Lettres
                         </Text>
-                        <BsArrowUpRight />
+                        <ImEnter fontSize={'20px'} />
                     </Flex>
                     <Flex
                         p={4}
+                        as={'a'}
+                        href={`/lettres/${id}`}
+                        target='_blank'
                         alignItems='center'
                         justifyContent={'space-between'}
                         roundedBottom={'sm'}
                         borderLeft={'1px'}
-                        cursor='pointer'
-                        onClick={() => setLiked(!liked)}>
-                        {liked ? (
-                            <BsHeartFill fill='red' fontSize={'24px'} />
-                        ) : (
-                            <BsHeart fontSize={'24px'} />
-                        )}
+                        >
+                        <BiLinkExternal fontSize={'24px'} />
                     </Flex>
                 </HStack>
             </Box>

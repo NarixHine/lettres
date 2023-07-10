@@ -1,8 +1,8 @@
-# Lettres
+# Lettres 💌
 
 > Letters of mine, for everyone.
 
-## Tech Stack
+## Stack ⚙️
 - Framework: `Next.js`,
 - UI Library: `Chakra UI`,
 - Database: `Xata` & `Vercel KV`,

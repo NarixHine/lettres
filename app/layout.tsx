@@ -1,4 +1,4 @@
-import { noto, raleway } from '@/lib/fonts'
+import { noto, raleway } from '@/src/fonts'
 import './globals.css'
 import { Providers } from './providers'
 import Navbar from '@/components/navbar'
@@ -11,12 +11,15 @@ export const metadata = {
 }
 
 async function getData() {
-  const getters = [kv.get('logo'), kv.get('title'), kv.get('footer')]
-  const data = await Promise.all(getters) as string[]
+  const [logo, title, footer] = await Promise.all([
+    kv.get('logo'),
+    kv.get('title'),
+    kv.get('footer')
+  ]) as string[]
   return {
-    logo: data[0],
-    title: data[1],
-    footer: data[2]
+    logo,
+    title,
+    footer
   }
 }
 

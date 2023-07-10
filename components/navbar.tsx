@@ -7,7 +7,7 @@ import Image from './chakra/image'
 import { UserButton, useAuth } from '@clerk/nextjs'
 import { CiLogin } from 'react-icons/ci'
 import { useRouter } from 'next/navigation'
-import { anto } from '@/lib/fonts'
+import { anto } from '@/src/fonts'
 import { dark } from '@clerk/themes'
 
 interface NavItem {
