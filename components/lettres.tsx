@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import { Box, Heading, Text, Img, Flex, Center, useColorModeValue, HStack, ResponsiveValue, } from '@chakra-ui/react'
 import { BiLinkExternal } from 'react-icons/bi'
 import { ImEnter } from 'react-icons/im'
 import { useRouter } from 'next/navigation'
 import Link from './chakra/link'
+import Tags from './tags'
 
 export default function Lettres({ cover, title, desc, id, tags, width, date }: {
     cover: string | null | undefined,
@@ -16,8 +16,9 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: {
     date: Date,
     width: ResponsiveValue<number | (string & {})>
 }) {
-    const [liked, setLiked] = useState(false)
     const router = useRouter()
+    const blackInDay = useColorModeValue('black', 'white')
+    const whiteInDay = useColorModeValue('white', 'black')
     return (
         <Center>
             <Box
@@ -25,9 +26,8 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: {
                 rounded={'sm'}
                 mx={[0, 5]}
                 overflow={'hidden'}
-                bg='white'
                 border={'1px'}
-                borderColor='black'
+                borderColor={blackInDay}
                 boxShadow={useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan')}>
                 {
                     cover ? <Box h={'200px'} borderBottom={'1px'} borderColor='black'>
@@ -42,31 +42,16 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: {
                     </Box> : <></>
                 }
                 <Box p={4} pb={3}>
-                    <Heading color={'black'} fontSize={'2xl'} noOfLines={1} display={'inline'}>
+                    <Heading fontSize={'2xl'} noOfLines={1} display={'inline'}>
                         {title}
                     </Heading>
-                    <Text as='sup' color={'gray.600'} mx={2}>{date.toDateString()}</Text>
+                    <Text as='sup' color={useColorModeValue('gray.600', 'gray.400')} mx={2}>{date.toDateString()}</Text>
                     <Text noOfLines={5} my={1}>
                         {desc}
                     </Text>
-                    {(tags ?? []).map((tag) => (
-                        <Box
-                            key={tag}
-                            bg='black'
-                            display={'inline-block'}
-                            px={2}
-                            py={1}
-                            mx={2}
-                            my={1}
-                            color='white'
-                            mb={2}>
-                            <Link href={`/tag/${tag}`} _hover={{ textDecoration: 'none' }} fontSize={'xs'} fontWeight='medium'>
-                                {tag}
-                            </Link>
-                        </Box>
-                    ))}
+                   <Tags tags={tags}></Tags>
                 </Box>
-                <HStack borderTop={'1px'} color='black'>
+                <HStack borderTop={'1px'}>
                     <Flex
                         p={4}
                         alignItems='center'
@@ -89,7 +74,7 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: {
                         justifyContent={'space-between'}
                         roundedBottom={'sm'}
                         borderLeft={'1px'}
-                        >
+                    >
                         <BiLinkExternal fontSize={'24px'} />
                     </Flex>
                 </HStack>

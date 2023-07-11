@@ -13,6 +13,7 @@ import Link from '@/components/chakra/link'
 import { getXataClient } from '@/src/xata'
 import { kv } from '@vercel/kv'
 import HomeDesc from './description'
+import Misskey from './misskey'
 
 async function getData() {
   const client = getXataClient()
@@ -47,7 +48,7 @@ export default async function Home() {
         height={'50vh'}
         position={'relative'}
         borderRadius={30}>
-        <NextImage priority style={{ objectFit: 'cover', objectPosition: '50% 5%' }} src={cover} fill={true} alt='Cover'></NextImage>
+        <NextImage priority style={{ objectFit: 'cover' }} src={cover} fill={true} alt='Cover'></NextImage>
         <Text
           top={'50%'}
           left={'50%'}
@@ -117,10 +118,17 @@ export default async function Home() {
         ))
       }</Stack>
 
-      <br></br><br></br>
+      <br></br>
+      <Box textAlign={'center'} borderBottom={'rgba(3, 102, 214, 0.3) double 6px'} my={3}>
+        <Box className='animate-bounce'>
+          <Link href='/archive' fontSize={'3xl'} className='text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500'>Archive ⮚</Link>
+        </Box>
+      </Box>
+
+      <br></br>
       <Box p={5} style={{ boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }}>
         <Text textAlign={'center'} fontSize={'2xl'} color={'teal.500'}><Link href='https://misskey.cloud/@lettres' target='_blank'>Misskey ⧉</Link></Text>
-        <iframe src='https://missbed.narix.link/timeboard/misskey.cloud/9gwc5sdvr8' className='mx-auto my-6 h-64 w-4/5 p-5' style={{ boxShadow: 'rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px' }}></iframe>
+        <Misskey></Misskey>
       </Box>
     </Main >
   )

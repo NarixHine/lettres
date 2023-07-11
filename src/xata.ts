@@ -10,12 +10,12 @@ const tables = [
   {
     name: "lettres",
     columns: [
-      { name: "body", type: "text" },
       { name: "desc", type: "string" },
       { name: "pin", type: "bool", notNull: true, defaultValue: "false" },
       { name: "cover", type: "string" },
       { name: "title", type: "string", notNull: true, defaultValue: "" },
       { name: "tags", type: "multiple" },
+      { name: "body", type: "text", notNull: true, defaultValue: "" },
     ],
   },
 ] as const;
