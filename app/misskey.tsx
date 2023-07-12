@@ -7,5 +7,5 @@ export default function Misskey() {
         base: 'https://missbed.narix.link/timeline/misskey.cloud/9gwc5sdvr8',
         lg: 'https://missbed.narix.link/timeboard/misskey.cloud/9gwc5sdvr8'
     })
-    return <iframe src={misskeySrc} className='mx-auto my-6 h-64 w-4/5 p-5'></iframe>
+    return <iframe src={misskeySrc} allowTransparency className='mx-auto my-6 h-60 w-full px-5'></iframe>
 }

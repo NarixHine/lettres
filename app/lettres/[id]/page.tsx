@@ -2,6 +2,7 @@ import { getXataClient } from '@/src/xata'
 import { notFound } from 'next/navigation'
 import markdownToHtml from 'zenn-markdown-html'
 import 'zenn-content-css'
+import styles from './lettres.module.css'
 import NextImage from 'next/image'
 import Main from '@/components/main'
 
@@ -37,13 +38,12 @@ export default async function LettresPage({ params }: { params: { id: string } }
                 </Box> : <></>
             }
             <Text as={'h1'} fontSize={'6xl'} mb={-1}>{title}</Text>
-            <Text className='relative text-stone-600 border-l border-solid border-stone-600 pl-2 ml-4 mb-3'>{desc}</Text>
+            <Text className='relative border-l border-solid pl-2 ml-4 mb-3 opacity-80'>{desc}</Text>
             <Tags tags={tags}></Tags>
 
             <hr style={{ margin: 10 }}></hr>
-            
-            <article className='znc' dangerouslySetInnerHTML={{ __html }}></article>
-            <br></br>
+
+            <article className={`znc ${styles.znc}`} dangerouslySetInnerHTML={{ __html }}></article>
         </Main>)
     }
     else {

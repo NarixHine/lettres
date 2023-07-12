@@ -4,21 +4,21 @@ import { Box, Heading, Text, Img, Flex, Center, useColorModeValue, HStack, Respo
 import { BiLinkExternal } from 'react-icons/bi'
 import { ImEnter } from 'react-icons/im'
 import { useRouter } from 'next/navigation'
-import Link from './chakra/link'
 import Tags from './tags'
 
-export default function Lettres({ cover, title, desc, id, tags, width, date }: {
+export interface LettresProps {
     cover: string | null | undefined,
     title: string,
     desc: string | null | undefined,
     id: string,
     tags: string[] | null | undefined,
     date: Date,
-    width: ResponsiveValue<number | (string & {})>
-}) {
+    width?: ResponsiveValue<number | (string & {})>
+}
+
+export default function Lettres({ cover, title, desc, id, tags, width, date }: LettresProps) {
     const router = useRouter()
     const blackInDay = useColorModeValue('black', 'white')
-    const whiteInDay = useColorModeValue('white', 'black')
     return (
         <Center>
             <Box
@@ -37,7 +37,7 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: {
                             objectFit='cover'
                             h='full'
                             w='full'
-                            alt={'Blog Image'}
+                            alt={'Cover Image'}
                         />
                     </Box> : <></>
                 }
@@ -45,16 +45,16 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: {
                     <Heading fontSize={'2xl'} noOfLines={1} display={'inline'}>
                         {title}
                     </Heading>
-                    <Text as='sup' color={useColorModeValue('gray.600', 'gray.400')} mx={2}>{date.toDateString()}</Text>
+                    <Text as='sup' whiteSpace={'nowrap'} color={useColorModeValue('gray.600', 'gray.400')} mx={2}>{date.toDateString()}</Text>
                     <Text noOfLines={5} my={1}>
                         {desc}
                     </Text>
-                   <Tags tags={tags}></Tags>
+                    <Tags tags={tags}></Tags>
                 </Box>
                 <HStack borderTop={'1px'}>
                     <Flex
                         p={4}
-                        alignItems='center'
+                        alignItems={'center'}
                         justifyContent={'space-between'}
                         roundedBottom={'sm'}
                         cursor={'pointer'}
@@ -70,7 +70,7 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: {
                         as={'a'}
                         href={`/lettres/${id}`}
                         target='_blank'
-                        alignItems='center'
+                        alignItems={'center'}
                         justifyContent={'space-between'}
                         roundedBottom={'sm'}
                         borderLeft={'1px'}

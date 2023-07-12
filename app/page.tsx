@@ -81,7 +81,7 @@ export default async function Home() {
 
         <Text
           top={5}
-          left={5}
+          left={0}
           position={'absolute'}
           fontSize={30}
           className={noto.className}>
@@ -89,7 +89,7 @@ export default async function Home() {
         </Text>
         <Text
           bottom={-10}
-          right={5}
+          right={0}
           position={'absolute'}
           fontSize={30}
           className={noto.className}>
@@ -121,7 +121,7 @@ export default async function Home() {
       <br></br>
       <Box textAlign={'center'} borderBottom={'rgba(3, 102, 214, 0.3) double 6px'} my={3}>
         <Box className='animate-bounce'>
-          <Link href='/archive' fontSize={'3xl'} className='text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500'>Archive ⮚</Link>
+          <Link href='/archive/1' fontSize={'3xl'} className='text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500'>Archive ➣</Link>
         </Box>
       </Box>
 
