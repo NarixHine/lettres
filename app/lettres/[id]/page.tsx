@@ -2,13 +2,12 @@ import { getXataClient } from '@/src/xata'
 import { notFound } from 'next/navigation'
 import markdownToHtml from 'zenn-markdown-html'
 import 'zenn-content-css'
-import styles from './lettres.module.css'
 import NextImage from 'next/image'
 import Main from '@/components/main'
-
 import Text from '@/components/chakra/text'
 import Tags from '@/components/tags'
 import Box from '@/components/chakra/box'
+import Article from './article'
 
 async function getData(id: string) {
     const client = getXataClient()
@@ -43,7 +42,7 @@ export default async function LettresPage({ params }: { params: { id: string } }
 
             <hr style={{ margin: 10 }}></hr>
 
-            <article className={`znc ${styles.znc}`} dangerouslySetInnerHTML={{ __html }}></article>
+            <Article __html={__html}></Article>
         </Main>)
     }
     else {
