@@ -1,4 +1,4 @@
-import { getXataClient } from '@/src/xata'
+import { getXataClient } from '@/lib/xata'
 import { notFound } from 'next/navigation'
 import markdownToHtml from 'zenn-markdown-html'
 import 'zenn-content-css'

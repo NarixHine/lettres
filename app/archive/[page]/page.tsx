@@ -1,7 +1,7 @@
 import Main from '@/components/main'
 import Pagination from '@/components/pagination'
 import Shelf from '@/components/shelf'
-import { getXataClient } from '@/src/xata'
+import { getXataClient } from '@/lib/xata'
 
 const PAGE_SIZE = 8
 

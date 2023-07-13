@@ -1,8 +1,11 @@
 import Main from '@/components/main'
-import Pagination from '@/components/pagination'
+import markdownToHtml from 'zenn-markdown-html'
+import 'zenn-content-css'
+import styles from './lettres.module.css'
 import Shelf from '@/components/shelf'
-import { getXataClient } from '@/src/xata'
+import { getXataClient } from '@/lib/xata'
 import { includes } from '@xata.io/client'
+import Text from '@/components/chakra/text'
 
 async function getData(tag: string) {
     const client = getXataClient()
@@ -13,13 +16,23 @@ async function getData(tag: string) {
         .sort('xata.createdAt', 'desc')
         .filter('tags', includes(tag))
         .getAll()
-    return lettres
+    const tagDesc = (await client
+        .db
+        .tags
+        .select(['desc'])
+        .filter('tag', tag)
+        .getFirst())
+        ?.desc ?? ''
+    return { lettres, tagDesc }
 }
 
 export default async function TagPage({ params }: { params: { tag: string } }) {
     const { tag } = params
-    const lettres = await getData(tag)
+    const { lettres, tagDesc } = await getData(tag)
     return (<Main>
+        <Text fontWeight={'bold'} fontSize={'5xl'} textAlign={'center'}>#{tag}</Text>
+        <div className={`znc text-center ${styles.znc}`} dangerouslySetInnerHTML={{ __html: markdownToHtml(tagDesc) }}></div>
+        <br></br>
         <Shelf lettres={lettres}></Shelf>
     </Main>)
 }

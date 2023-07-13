@@ -1,4 +1,4 @@
-import { LettresRecord } from '@/src/xata'
+import { LettresRecord } from '@/lib/xata'
 import { RecordArray, SelectedPick } from '@xata.io/client'
 import SimpleGrid from './chakra/grid'
 import Lettres from './lettres'

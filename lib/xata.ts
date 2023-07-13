@@ -18,6 +18,20 @@ const tables = [
       { name: "body", type: "text", notNull: true, defaultValue: "" },
     ],
   },
+  {
+    name: "messages",
+    columns: [
+      { name: "uid", type: "string", notNull: true, defaultValue: "" },
+      { name: "body", type: "text", notNull: true, defaultValue: "" },
+    ],
+  },
+  {
+    name: "tags",
+    columns: [
+      { name: "tag", type: "string", unique: true },
+      { name: "desc", type: "text" },
+    ],
+  },
 ] as const;
 
 export type SchemaTables = typeof tables;
@@ -26,14 +40,22 @@ export type InferredTypes = SchemaInference<SchemaTables>;
 export type Lettres = InferredTypes["lettres"];
 export type LettresRecord = Lettres & XataRecord;
 
+export type Messages = InferredTypes["messages"];
+export type MessagesRecord = Messages & XataRecord;
+
+export type Tags = InferredTypes["tags"];
+export type TagsRecord = Tags & XataRecord;
+
 export type DatabaseSchema = {
   lettres: LettresRecord;
+  messages: MessagesRecord;
+  tags: TagsRecord;
 };
 
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
-  databaseURL: "https://Lettres-ai3lvl.us-east-1.xata.sh/db/blog",
+  databaseURL: "https://Lettres-ai3lvl.us-east-1.xata.sh/db/lettres",
 };
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {

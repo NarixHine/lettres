@@ -1,4 +1,4 @@
-import { noto, raleway } from '@/src/fonts'
+import { noto, raleway } from '@/lib/fonts'
 import './globals.css'
 import { Providers } from './providers'
 import Navbar from '@/components/navbar'
