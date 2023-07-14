@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import styles from './lettres.module.css'
+import styles from '@/styles/znc.module.css'
 import { useRouter } from 'next/navigation'
 
 export default function Article({ __html }: { __html: string }) {

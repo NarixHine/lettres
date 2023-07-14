@@ -1,7 +1,7 @@
 import Main from '@/components/main'
 import markdownToHtml from 'zenn-markdown-html'
 import 'zenn-content-css'
-import styles from './lettres.module.css'
+import styles from '@/styles/znc.module.css'
 import Shelf from '@/components/shelf'
 import { getXataClient } from '@/lib/xata'
 import { includes } from '@xata.io/client'

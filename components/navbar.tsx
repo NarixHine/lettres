@@ -18,11 +18,15 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
     {
+        label: 'Home',
+        href: '/',
+    },
+    {
         label: 'Explore',
         children: [
             {
-                label: 'Home',
-                href: '/',
+                label: 'Ask AI (Account Required)',
+                href: '/ask',
             },
             {
                 label: 'Archive',
