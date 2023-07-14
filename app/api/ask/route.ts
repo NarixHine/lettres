@@ -1,20 +1,9 @@
 import { getXataClient } from '@/lib/xata'
 import { AskResult } from '@xata.io/client'
 import { NextResponse } from 'next/server'
-import { z } from 'zod'
-
-export const config = {
-    runtime: 'edge',
-}
-
-const bodySchema = z.object({
-    database: z.string(),
-    question: z.string(),
-})
 
 export async function POST(req: Request): Promise<Response> {
     const body = await req.json()
-
     const encoder = new TextEncoder()
 
     const xata = getXataClient()
