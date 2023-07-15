@@ -16,6 +16,7 @@ const tables = [
       { name: "title", type: "string", notNull: true, defaultValue: "" },
       { name: "tags", type: "multiple" },
       { name: "body", type: "text", notNull: true, defaultValue: "" },
+      { name: "cn", type: "bool", notNull: true, defaultValue: "true" },
     ],
   },
   {

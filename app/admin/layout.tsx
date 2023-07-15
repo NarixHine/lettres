@@ -3,6 +3,7 @@ import { getXataClient } from '@/lib/xata'
 import Tab, { Tabs, TabList, TabPanels, TabPanel } from '@/components/chakra/tab'
 import { Metadata } from 'next'
 import List from '@/components/list'
+import { currentUser } from '@clerk/nextjs'
 
 export const metadata: Metadata = {
     title: 'Admin Console'
@@ -29,6 +30,10 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode
 }) {
+    const role = (await currentUser())?.publicMetadata.role
+    if (role !== 'admin')
+        throw Error('403 FORBIDDEN')
+
     const { lettres, tags } = await getData()
 
     return (

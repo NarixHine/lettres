@@ -8,6 +8,7 @@ import Tags from '@/components/tags'
 import Box from '@/components/chakra/box'
 import { Metadata } from 'next'
 import Markdown from '@/components/markdown'
+import { headers } from 'next/dist/client/components/headers'
 
 interface LettresParams {
     params: { id: string }
@@ -26,7 +27,7 @@ async function getData(id: string) {
     const data = await client
         .db
         .lettres
-        .select(['desc', 'title', 'tags', 'cover', 'xata.createdAt', 'body'])
+        .select(['desc', 'title', 'tags', 'cover', 'xata.createdAt', 'body', 'cn'])
         .filter({ id })
         .getFirst()
     return data
@@ -35,7 +36,10 @@ async function getData(id: string) {
 export default async function LettresPage({ params }: LettresParams) {
     const lettres = await getData(params.id)
     if (lettres) {
-        const { title, desc, cover, tags, body } = lettres
+        const { title, desc, cover, tags, body, cn } = lettres
+        if (!cn && headers().get('cf-ipcountry') === 'CN')
+            throw Error('451 UNAVAILABLE IN CHINA')
+
         return (<Main>
             {
                 cover ? <Box
