@@ -6,11 +6,7 @@ import { Balancer } from 'react-wrap-balancer'
 import { Box, Button, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 import useAskXata from '@/lib/ask'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Ask AI'
-}
+import Head from 'next/head'
 
 export default function AskPage() {
   const [question, setQuestion] = useState('')
@@ -18,6 +14,9 @@ export default function AskPage() {
 
   return (
     <Main>
+      <Head>
+        <title>Ask AI</title>
+      </Head>
       <Text fontWeight={'bold'} fontSize={'5xl'} textAlign={'center'}>Ask AI</Text>
       <Text textAlign={'center'}>
         <Balancer>

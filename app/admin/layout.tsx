@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 import List from '@/components/list'
 
 export const metadata: Metadata = {
-    title: 'Control Panel'
+    title: 'Admin Console'
 }
 
 async function getData() {
@@ -44,14 +44,20 @@ export default async function RootLayout({
                         <List items={lettres.map(({ id, title }) => ({
                             text: title,
                             url: `/admin/lettres/${id}`
-                        }))}></List>
+                        })).concat({
+                            text: 'New Lettres',
+                            url: '/admin/lettres/new'
+                        })}></List>
                     </TabPanel>
 
                     <TabPanel>
                         <List items={tags.map(({ tag }) => ({
                             text: tag as string,
                             url: `/admin/tag/${tag}`
-                        }))}></List>
+                        })).concat({
+                            text: 'New Tag',
+                            url: '/admin/tag/new'
+                        })}></List>
                     </TabPanel>
                 </TabPanels>
             </Tabs>

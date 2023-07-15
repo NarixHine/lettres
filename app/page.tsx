@@ -27,9 +27,7 @@ async function getData() {
   const [floatingLogo, slogan, cover, desc] = (await client
     .db
     .settings
-    .select(['config'])
-    .filter({ name: 'home' })
-    .getFirst())?.config as string[]
+    .read('home'))?.config as string[]
   const lettres = await client
     .db
     .lettres

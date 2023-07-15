@@ -38,7 +38,7 @@ const NAV_ITEMS: Array<NavItem> = [
         label: 'Restricted Pages',
         children: [
             {
-                label: 'Control Panel',
+                label: 'Admin Console',
                 href: '/admin'
             }
         ]

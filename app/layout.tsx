@@ -19,9 +19,7 @@ async function getData() {
   const [logo, title, footer] = (await client
     .db
     .settings
-    .select(['config'])
-    .filter({ name: 'layout' })
-    .getFirst())?.config as string[]
+    .read('layout'))?.config as string[]
   return {
     logo,
     title,

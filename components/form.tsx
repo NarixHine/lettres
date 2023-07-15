@@ -1,6 +1,12 @@
 'use client'
 
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, Button, FormControl, FormHelperText, Input, Textarea, useToast } from '@chakra-ui/react'
+import Box from './chakra/box'
+import Button from './chakra/button'
+import FormControl, { FormHelperText } from './chakra/form'
+import Textarea from './chakra/textarea'
+import Input from './chakra/input'
+import Accordion, { AccordionButton, AccordionItem, AccordionPanel, AccordionIcon } from './chakra/accordian'
+import { useToast } from '@chakra-ui/react'
 
 export default function Form({ items, action, deleteAction, view }: {
     items: {
@@ -19,7 +25,7 @@ export default function Form({ items, action, deleteAction, view }: {
             action(formData)
                 .then(() => {
                     toast({
-                        description: 'Succeeded',
+                        description: 'Updated',
                         status: 'success',
                     })
                 })
@@ -36,7 +42,7 @@ export default function Form({ items, action, deleteAction, view }: {
                         <Box key={name} mb={5}>
                             {
                                 multiline ?
-                                    <Textarea variant={'filled'} defaultValue={value ?? ''} width={'full'} name={name}></Textarea> :
+                                    <Textarea variant={'filled'} minHeight={200} defaultValue={value ?? ''} width={'full'} name={name}></Textarea> :
                                     <Input variant={'flushed'} defaultValue={value ?? ''} width={'full'} name={name}></Input>
                             }
                             <FormHelperText>{text}</FormHelperText>
@@ -61,7 +67,7 @@ export default function Form({ items, action, deleteAction, view }: {
                                     deleteAction()
                                         .then(() => {
                                             toast({
-                                                description: 'Succeeded',
+                                                description: 'Deleted',
                                                 status: 'success',
                                             })
                                         })

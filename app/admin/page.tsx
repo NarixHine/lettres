@@ -7,15 +7,11 @@ async function getData() {
     const [floatingLogo, slogan, cover, desc] = (await client
         .db
         .settings
-        .select(['config'])
-        .filter({ name: 'home' })
-        .getFirst())?.config as string[]
+        .read('home'))?.config as string[]
     const [logo, title, footer] = (await client
         .db
         .settings
-        .select(['config'])
-        .filter({ name: 'layout' })
-        .getFirst())?.config as string[]
+        .read('layout'))?.config as string[]
     return {
         floatingLogo,
         slogan,
@@ -40,7 +36,13 @@ export default async function AdminPage() {
 
     const submit = async (data: FormData) => {
         'use server'
+
+        const get = (key: string) => data.get(key) as string
         const client = getXataClient()
+        await Promise.all([
+            client.db.settings.update('home', { config: [get('floatingLogo'), get('slogan'), get('cover'), get('desc')] }),
+            client.db.settings.update('layout', { config: [get('logo'), get('title'), get('footer')] })
+        ])
     }
 
     return (<Form action={submit} view='/' items={[{

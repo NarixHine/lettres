@@ -25,13 +25,7 @@ const tables = [
       { name: "desc", type: "text" },
     ],
   },
-  {
-    name: "settings",
-    columns: [
-      { name: "config", type: "multiple" },
-      { name: "name", type: "string", unique: true },
-    ],
-  },
+  { name: "settings", columns: [{ name: "config", type: "multiple" }] },
 ] as const;
 
 export type SchemaTables = typeof tables;
