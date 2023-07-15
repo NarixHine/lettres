@@ -1,22 +1,12 @@
 'use client'
 
-import Main from '@/components/main'
-import { Box, Button, Heading, Text } from '@chakra-ui/react'
+import ErrorPanel from '@/components/error'
 
-export default function Error({
-  error,
+export default function ErrorPage({
   reset,
 }: {
   error: Error
   reset: () => void
 }) {
-  return (
-    <Main className='text-center flex flex-col justify-center space-y-2'>
-      <Heading fontSize={'6xl'}>Error</Heading>
-      <Text fontSize='2xl' color={'red.300'}>{error.message}</Text>
-      <Box py={1}>
-        <Button colorScheme='red' onClick={reset}>Retry</Button>
-      </Box>
-    </Main>
-  )
+  return <ErrorPanel error={new Error('An error has occurred.')} reset={reset}></ErrorPanel>
 }

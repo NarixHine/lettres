@@ -9,6 +9,7 @@ import Box from '@/components/chakra/box'
 import { Metadata } from 'next'
 import Markdown from '@/components/markdown'
 import { headers } from 'next/dist/client/components/headers'
+import ErrorPanel from '@/components/error'
 
 interface LettresParams {
     params: { id: string }
@@ -38,7 +39,7 @@ export default async function LettresPage({ params }: LettresParams) {
     if (lettres) {
         const { title, desc, cover, tags, body, cn } = lettres
         if (!cn && headers().get('cf-ipcountry') === 'CN')
-            throw Error('451 UNAVAILABLE IN CHINA')
+            return <ErrorPanel error={new Error('451 UNAVAILABLE IN CHINA')}></ErrorPanel>
 
         return (<Main>
             {

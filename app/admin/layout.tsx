@@ -4,6 +4,7 @@ import Tab, { Tabs, TabList, TabPanels, TabPanel } from '@/components/chakra/tab
 import { Metadata } from 'next'
 import List from '@/components/list'
 import { currentUser } from '@clerk/nextjs'
+import ErrorPanel from '@/components/error'
 
 export const metadata: Metadata = {
     title: 'Admin Console'
@@ -32,7 +33,7 @@ export default async function RootLayout({
 }) {
     const role = (await currentUser())?.publicMetadata.role
     if (role !== 'admin')
-        throw Error('403 FORBIDDEN')
+        return <ErrorPanel error={new Error('403 FORBIDDEN')}></ErrorPanel>
 
     const { lettres, tags } = await getData()
 
