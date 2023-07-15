@@ -1,11 +1,26 @@
 import Main from '@/components/main'
-import markdownToHtml from 'zenn-markdown-html'
 import 'zenn-content-css'
-import styles from '@/styles/znc.module.css'
 import Shelf from '@/components/shelf'
 import { getXataClient } from '@/lib/xata'
 import { includes } from '@xata.io/client'
 import Text from '@/components/chakra/text'
+import { Metadata } from 'next'
+import Markdown from '@/components/markdown'
+
+interface TagParam {
+    params: { tag: string }
+}
+
+export async function generateMetadata(
+    { params }: TagParam
+): Promise<Metadata> {
+    const tag = decodeURIComponent(params.tag)
+    const { tagDesc } = await getData(decodeURIComponent(tag))
+    return {
+        title: `#${tag}`,
+        description: tagDesc
+    }
+}
 
 async function getData(tag: string) {
     const client = getXataClient()
@@ -26,12 +41,12 @@ async function getData(tag: string) {
     return { lettres, tagDesc }
 }
 
-export default async function TagPage({ params }: { params: { tag: string } }) {
-    const { tag } = params
-    const { lettres, tagDesc } = await getData(tag)
+export default async function TagPage({ params }: TagParam) {
+    const tag = decodeURIComponent(params.tag)
+    const { lettres, tagDesc } = await getData(decodeURIComponent(tag))
     return (<Main>
         <Text fontWeight={'bold'} fontSize={'5xl'} textAlign={'center'}>#{tag}</Text>
-        <div className={`znc text-center ${styles.znc}`} dangerouslySetInnerHTML={{ __html: markdownToHtml(tagDesc) }}></div>
+        <Markdown md={tagDesc} className={'text-center'}></Markdown>
         <br></br>
         <Shelf lettres={lettres}></Shelf>
     </Main>)

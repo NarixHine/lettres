@@ -6,6 +6,11 @@ import { Balancer } from 'react-wrap-balancer'
 import { Box, Button, Input } from '@chakra-ui/react'
 import { useState } from 'react'
 import useAskXata from '@/lib/ask'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Ask AI'
+}
 
 export default function AskPage() {
   const [question, setQuestion] = useState('')
@@ -21,7 +26,7 @@ export default function AskPage() {
       </Text>
       <br></br>
       <Box mx='auto' display={'flex'}>
-        <Input variant='flushed' placeholder='Flushed' onChange={(e) => setQuestion(e.target.value)} />
+        <Input variant='flushed' placeholder='Anything in Lettres ...' onChange={(e) => setQuestion(e.target.value)} />
         <Button colorScheme='teal' variant='outline' mx={5} disabled={isLoading} onClick={() => askQuestion(question)}>
           Ask
         </Button>

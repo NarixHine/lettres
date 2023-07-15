@@ -4,18 +4,24 @@ import { Providers } from './providers'
 import Navbar from '@/components/navbar'
 import { ClerkProvider } from '@clerk/nextjs'
 import Footer from '@/components/footer'
-import { kv } from '@vercel/kv'
+import { Metadata } from 'next'
+import { getXataClient } from '@/lib/xata'
 
-export const metadata = {
-  title: 'Lettres',
+export async function generateMetadata(): Promise<Metadata> {
+  const { title } = await getData()
+  return {
+    title,
+  }
 }
 
 async function getData() {
-  const [logo, title, footer] = await Promise.all([
-    kv.get('logo'),
-    kv.get('title'),
-    kv.get('footer')
-  ]) as string[]
+  const client = getXataClient()
+  const [logo, title, footer] = (await client
+    .db
+    .settings
+    .select(['config'])
+    .filter({ name: 'layout' })
+    .getFirst())?.config as string[]
   return {
     logo,
     title,

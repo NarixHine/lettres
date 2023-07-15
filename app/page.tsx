@@ -11,18 +11,25 @@ import Lettres from '@/components/lettres'
 import Stack from '@/components/chakra/stack'
 import Link from '@/components/chakra/link'
 import { getXataClient } from '@/lib/xata'
-import { kv } from '@vercel/kv'
 import HomeDesc from './description'
 import Misskey from './misskey'
+import { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { slogan } = await getData()
+  return {
+    description: slogan,
+  }
+}
 
 async function getData() {
   const client = getXataClient()
-  const [floatingLogo, slogan, cover, desc] = await Promise.all([
-    kv.get('floating_logo'),
-    kv.get('slogan'),
-    kv.get('cover'),
-    kv.get('desc'),
-  ]) as string[]
+  const [floatingLogo, slogan, cover, desc] = (await client
+    .db
+    .settings
+    .select(['config'])
+    .filter({ name: 'home' })
+    .getFirst())?.config as string[]
   const lettres = await client
     .db
     .lettres

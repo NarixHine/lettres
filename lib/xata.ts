@@ -19,17 +19,17 @@ const tables = [
     ],
   },
   {
-    name: "messages",
-    columns: [
-      { name: "uid", type: "string", notNull: true, defaultValue: "" },
-      { name: "body", type: "text", notNull: true, defaultValue: "" },
-    ],
-  },
-  {
     name: "tags",
     columns: [
       { name: "tag", type: "string", unique: true },
       { name: "desc", type: "text" },
+    ],
+  },
+  {
+    name: "settings",
+    columns: [
+      { name: "config", type: "multiple" },
+      { name: "name", type: "string", unique: true },
     ],
   },
 ] as const;
@@ -40,16 +40,16 @@ export type InferredTypes = SchemaInference<SchemaTables>;
 export type Lettres = InferredTypes["lettres"];
 export type LettresRecord = Lettres & XataRecord;
 
-export type Messages = InferredTypes["messages"];
-export type MessagesRecord = Messages & XataRecord;
-
 export type Tags = InferredTypes["tags"];
 export type TagsRecord = Tags & XataRecord;
 
+export type Settings = InferredTypes["settings"];
+export type SettingsRecord = Settings & XataRecord;
+
 export type DatabaseSchema = {
   lettres: LettresRecord;
-  messages: MessagesRecord;
   tags: TagsRecord;
+  settings: SettingsRecord;
 };
 
 const DatabaseClient = buildClient();

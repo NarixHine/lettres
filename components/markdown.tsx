@@ -3,8 +3,9 @@
 import { useEffect } from 'react'
 import styles from '@/styles/znc.module.css'
 import { useRouter } from 'next/navigation'
+import markdownToHtml from 'zenn-markdown-html'
 
-export default function Article({ __html }: { __html: string }) {
+export default function Markdown({ md, className }: { md: string, className?: string }) {
     const router = useRouter()
     useEffect(() => {
         const article = document.getElementsByClassName('znc')[0]
@@ -19,6 +20,6 @@ export default function Article({ __html }: { __html: string }) {
         })
     }, [router])
     return (
-        <article className={`znc ${styles.znc}`} dangerouslySetInnerHTML={{ __html }}></article>
+        <article className={`znc ${styles.znc} ${className}`} dangerouslySetInnerHTML={{ __html: markdownToHtml(md) }}></article>
     )
 }
