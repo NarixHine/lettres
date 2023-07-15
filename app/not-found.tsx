@@ -1,5 +1,6 @@
+import Heading from '@/components/chakra/heading'
 import Main from '@/components/main'
-import { Heading, Text } from '@chakra-ui/react'
+import Text from '@/components/chakra/text'
 
 export default function NotFound() {
   return (
