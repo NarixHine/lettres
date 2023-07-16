@@ -42,9 +42,9 @@ export default function Lettres({ cover, title, desc, id, tags, width, date }: L
                     </Box> : <></>
                 }
                 <Box p={4} pb={3}>
-                    <Heading fontSize={'2xl'} noOfLines={1} display={'inline'}>
+                    <Text fontWeight={'bold'} fontSize={'2xl'} noOfLines={1} display={'inline'}>
                         {title}
-                    </Heading>
+                    </Text>
                     <Text as='sup' whiteSpace={'nowrap'} color={useColorModeValue('gray.600', 'gray.400')} mx={2}>{date.toDateString()}</Text>
                     <Text noOfLines={5} my={1}>
                         {desc}
