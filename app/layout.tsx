@@ -11,6 +11,19 @@ export async function generateMetadata(): Promise<Metadata> {
   const { title } = await getData()
   return {
     title,
+    applicationName: title,
+    appleWebApp: {
+      capable: true,
+      title,
+      statusBarStyle: 'default',
+    },
+    formatDetection: {
+      telephone: false,
+    },
+    themeColor: '#1A202C',
+    viewport:
+      'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
+    manifest: '/manifest.json',
   }
 }
 

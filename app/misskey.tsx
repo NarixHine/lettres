@@ -1,6 +1,6 @@
 'use client'
 
-import { useBreakpointValue } from "@chakra-ui/react"
+import { useBreakpointValue } from '@chakra-ui/react'
 
 export default function Misskey() {
     const misskeySrc = useBreakpointValue({

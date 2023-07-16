@@ -4,7 +4,7 @@ import SimpleGrid from './chakra/grid'
 import Lettres from './lettres'
 
 export default function Shelf({ lettres }: {
-    lettres: SelectedPick<LettresRecord, ("title" | "desc" | "id" | "xata.createdAt" | "cover" | "tags")[]>[] | RecordArray<SelectedPick<LettresRecord, ('title' | 'desc' | 'cover' | 'tags' | 'id' | 'xata.createdAt')[]>>
+    lettres: SelectedPick<LettresRecord, ('title' | 'desc' | 'id' | 'xata.createdAt' | 'cover' | 'tags')[]>[] | RecordArray<SelectedPick<LettresRecord, ('title' | 'desc' | 'cover' | 'tags' | 'id' | 'xata.createdAt')[]>>
 }) {
     return (
         <SimpleGrid columns={[1, null, 2]} spacing={10} w={'full'}>
