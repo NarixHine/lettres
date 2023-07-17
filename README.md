@@ -2,12 +2,9 @@
 
 > Letters of mine, for everyone.
 
-## Motivation for the Project 💬
+## Motivation for this Project 💬
 
-- I long for the fragrance of the **arts** and **literature**.
-- J’aspire á la fragrance des **arts** et de la **littérature**.
-- 私、**芸術**と**文学**の香りに憧れる。
-- 我，向往**艺术**与**文学**的馥郁。
+![Preview Screenshot](https://github.com/NarixHine/lettres/assets/127665924/27d09163-1239-4921-93a4-2ea3180094e5)
 
 ## Stack ⚙️
 - Framework: `Next.js`,
