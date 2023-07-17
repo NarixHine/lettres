@@ -8,7 +8,7 @@ async function getData() {
         .db
         .settings
         .read('home'))?.config as string[]
-    const [logo, title, footer] = (await client
+    const [logo, title, footer, footerLogo] = (await client
         .db
         .settings
         .read('layout'))?.config as string[]
@@ -19,7 +19,8 @@ async function getData() {
         desc,
         logo,
         title,
-        footer
+        footer,
+        footerLogo
     }
 }
 
@@ -31,7 +32,8 @@ export default async function AdminPage() {
         desc,
         logo,
         title,
-        footer
+        footer,
+        footerLogo
     } = await getData()
 
     const submit = async (data: FormData) => {
@@ -41,7 +43,7 @@ export default async function AdminPage() {
         const client = getXataClient()
         await Promise.all([
             client.db.settings.update('home', { config: [get('floatingLogo'), get('slogan'), get('cover'), get('desc')] }),
-            client.db.settings.update('layout', { config: [get('logo'), get('title'), get('footer')] })
+            client.db.settings.update('layout', { config: [get('logo'), get('title'), get('footer'), get('footerLogo')] })
         ])
     }
 
@@ -54,13 +56,17 @@ export default async function AdminPage() {
         name: 'logo',
         value: logo
     }, {
-        text: 'Footer Text',
-        name: 'footer',
-        value: footer
-    }, {
         text: 'Floating Logo URL',
         name: 'floatingLogo',
         value: floatingLogo
+    }, {
+        text: 'Footer Logo URL',
+        name: 'footerLogo',
+        value: footerLogo
+    }, {
+        text: 'Footer Text',
+        name: 'footer',
+        value: footer
     }, {
         text: 'Slogan',
         name: 'slogan',

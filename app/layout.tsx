@@ -29,14 +29,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 async function getData() {
   const client = getXataClient()
-  const [logo, title, footer] = (await client
+  const [logo, title, footer, footerLogo] = (await client
     .db
     .settings
     .read('layout'))?.config as string[]
   return {
     logo,
     title,
-    footer
+    footer,
+    footerLogo
   }
 }
 
@@ -45,7 +46,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const { logo, title, footer } = await getData()
+  const { logo, title, footer, footerLogo } = await getData()
 
   return (
     <html lang='zh-CN'>
@@ -53,10 +54,8 @@ export default async function RootLayout({
         <body style={{ fontFamily: `${raleway.style.fontFamily}, ${noto.style.fontFamily}` }}>
           <Providers>
             <Navbar logo={logo} title={title}></Navbar>
-
             {children}
-
-            <Footer info={footer} logo={logo}></Footer>
+            <Footer info={footer} logo={footerLogo}></Footer>
           </Providers>
         </body>
       </ClerkProvider>

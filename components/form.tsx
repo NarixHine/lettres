@@ -6,15 +6,21 @@ import FormControl, { FormHelperText } from './chakra/form'
 import Textarea from './chakra/textarea'
 import Input from './chakra/input'
 import Accordion, { AccordionButton, AccordionItem, AccordionPanel, AccordionIcon } from './chakra/accordian'
-import { useToast } from '@chakra-ui/react'
+import { Switch, useToast } from '@chakra-ui/react'
 
-export default function Form({ items, action, deleteAction, view }: {
-    items: {
+export default function Form({ items, action, deleteAction, view, boolItems = [] }: {
+    items: ({
         text: string,
         name: string,
         value?: string | null,
         multiline?: boolean,
-    }[],
+        editable?: boolean
+    })[],
+    boolItems?: ({
+        text: string,
+        name: string,
+        value?: boolean,
+    })[],
     action: ((formData: FormData) => Promise<void>),
     deleteAction?: () => Promise<void>,
     view?: string
@@ -38,13 +44,21 @@ export default function Form({ items, action, deleteAction, view }: {
         }}>
             <FormControl>
                 {
-                    items.map(({ text, name, value, multiline }) => (
+                    items.map(({ text, name, value, multiline, editable }) => (
                         <Box key={name} mb={5}>
                             {
                                 multiline ?
-                                    <Textarea variant={'filled'} minHeight={200} defaultValue={value ?? ''} width={'full'} name={name}></Textarea> :
-                                    <Input variant={'flushed'} defaultValue={value ?? ''} width={'full'} name={name}></Input>
+                                    <Textarea variant={'filled'} minHeight={248} defaultValue={value ?? ''} width={'full'} name={name} readOnly={editable === false}></Textarea> :
+                                    <Input variant={'flushed'} defaultValue={value ?? ''} width={'full'} name={name} readOnly={editable === false}></Input>
                             }
+                            <FormHelperText>{text}</FormHelperText>
+                        </Box>
+                    ))
+                }
+                {
+                    boolItems.map(({ text, name, value }) => (
+                        <Box key={name} mb={5}>
+                            <Switch defaultChecked={value} name={name}></Switch>
                             <FormHelperText>{text}</FormHelperText>
                         </Box>
                     ))
