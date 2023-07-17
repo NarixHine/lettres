@@ -77,6 +77,7 @@ export default async function Home() {
             src={floatingLogo}
             alt='Logo'
             width={50}
+            opacity={0.7}
             position={'absolute'}
             top={-25}
             left={'50%'}
