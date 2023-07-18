@@ -4,16 +4,16 @@ import { MetadataRoute } from 'next'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const client = getXataClient()
     const lettres = (await client.db.lettres.select(['id', 'xata.updatedAt']).getAll()).map(({ id, xata }) => ({
-        url: `/lettres/${id}`,
+        url: `https://lettres.narix.link/lettres/${id}`,
         lastModified: xata.updatedAt
     }))
     const tags = (await client.db.tags.select(['tag', 'xata.updatedAt']).getAll()).map(({ tag, xata }) => ({
-        url: `/tag/${tag}`,
+        url: `https://lettres.narix.link/tag/${tag}`,
         lastModified: xata.updatedAt
     }))
     return [
         {
-            url: '/',
+            url: 'https://lettres.narix.link/',
             lastModified: new Date(),
         },
         ...lettres,
