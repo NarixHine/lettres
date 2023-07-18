@@ -2,9 +2,8 @@
 
 > Letters of mine, for everyone.
 
-## Motivation for this Project 💬
-
-![Preview Screenshot](https://github.com/NarixHine/lettres/assets/127665924/27d09163-1239-4921-93a4-2ea3180094e5)
+## A Glimpse at this Project 💬
+![Screenshot](https://github.com/NarixHine/lettres/assets/127665924/2f62bd57-7dfb-4530-b2b7-c0a9b987ed03)
 
 ## Stack ⚙️
 - Framework: `Next.js`,
