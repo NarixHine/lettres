@@ -66,6 +66,7 @@ export default async function Home() {
             className={`${dancing.className} bg-slate-100/80`}
             backgroundImage={'linear-gradient(rgb(255,255,255) 1px, transparent 1px),linear-gradient(90deg, rgb(255,255,255) 1px, transparent 1px)'}
             backgroundSize={'20px 20px, 20px 20px'}
+            backgroundPosition={'-1px -1px, -1px -1px'}
             fontSize={50}>
             {slogan}
           </Text>
