@@ -6,6 +6,7 @@ import { includes } from '@xata.io/client'
 import Text from '@/components/chakra/text'
 import { Metadata } from 'next'
 import Markdown from '@/components/markdown'
+import { Balancer } from 'react-wrap-balancer'
 
 interface TagParam {
     params: { tag: string }
@@ -46,7 +47,9 @@ export default async function TagPage({ params }: TagParam) {
     const { lettres, tagDesc } = await getData(decodeURIComponent(tag))
     return (<Main>
         <Text fontWeight={'bold'} fontSize={'5xl'} textAlign={'center'}>#{tag}</Text>
-        <Markdown md={tagDesc} className={'text-center'}></Markdown>
+        <Balancer>
+            <Markdown md={tagDesc} className={'text-center'}></Markdown>
+        </Balancer>
         <br></br>
         <Shelf lettres={lettres}></Shelf>
     </Main>)
