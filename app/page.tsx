@@ -54,21 +54,20 @@ export default async function Home() {
         position={'relative'}
         borderRadius={30}>
         <NextImage priority style={{ objectFit: 'cover' }} src={cover} fill={true} alt='Cover'></NextImage>
-        <Text
-          top={'50%'}
-          left={'50%'}
-          transform={'translate(-50%, -50%)'}
-          position={'absolute'}
-          bgColor={'rgba(251, 255, 213, 0.8)'}
-          color={'green.700'}
-          borderRadius={20}
-          p={'0px 20px'}
-          className={dancing.className}
-          fontSize={50}>
-          <Balancer>
+        <Balancer>
+          <Text
+            top={'50%'}
+            left={'50%'}
+            transform={'translate(-50%, -50%)'}
+            position={'absolute'}
+            color={'rgb(64,120,108)'}
+            borderRadius={20}
+            p={'0px 20px'}
+            className={`${dancing.className} bg-slate-200/80`}
+            fontSize={50}>
             {slogan}
-          </Balancer>
-        </Text>
+          </Text>
+        </Balancer>
       </Box>
 
       <Box position={'relative'}>

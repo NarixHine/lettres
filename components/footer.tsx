@@ -1,7 +1,6 @@
 'use client'
 
 import { Divider, AbsoluteCenter, Box, Image } from '@chakra-ui/react'
-import Balancer from 'react-wrap-balancer'
 import Markdown from './markdown'
 
 export default function Footer({ info, logo }: {
@@ -16,7 +15,7 @@ export default function Footer({ info, logo }: {
                     <Image src={logo} alt='Logo' height={10}></Image>
                 </AbsoluteCenter>
             </Box>
-            <Box textAlign={'center'} fontStyle={'italic'} opacity={0.6} fontSize={'sm'} my={5}>
+            <Box textAlign={'center'} opacity={0.6} fontSize={'sm'} my={5}>
                 <Markdown md={info}></Markdown>
             </Box>
         </>

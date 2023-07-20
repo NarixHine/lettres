@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './pagination.module.css'
+import styles from '@/styles/pagination.module.css'
 import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 
