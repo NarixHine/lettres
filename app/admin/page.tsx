@@ -1,5 +1,7 @@
 import Form from '@/components/form'
 import { getXataClient } from '@/lib/xata'
+import { auth } from '@clerk/nextjs'
+import { log } from 'next-axiom'
 
 async function getData() {
     const client = getXataClient()
@@ -41,10 +43,14 @@ export default async function AdminPage() {
 
         const get = (key: string) => data.get(key) as string
         const client = getXataClient()
+        const home = { config: [get('floatingLogo'), get('slogan'), get('cover'), get('desc')] }
+        const layout = { config: [get('logo'), get('title'), get('footer'), get('footerLogo')] }
         await Promise.all([
-            client.db.settings.update('home', { config: [get('floatingLogo'), get('slogan'), get('cover'), get('desc')] }),
-            client.db.settings.update('layout', { config: [get('logo'), get('title'), get('footer'), get('footerLogo')] })
+            client.db.settings.update('home', home),
+            client.db.settings.update('layout', layout)
         ])
+
+        log.info('Settings Updated', { new: { home, layout }, uid: auth().userId })
     }
 
     return (<Form action={submit} view='/' items={[{

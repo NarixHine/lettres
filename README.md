@@ -11,4 +11,5 @@
 - Database: `Xata`,
 - Authentication: `Clerk`,
 - Deployed on `Vercel`,
+- Observed with `next-axiom`,
 - Text written in `Markdown`, rendered by [`zenn-editor`](https://github.com/zenn-dev/zenn-editor).
