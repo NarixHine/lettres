@@ -25,13 +25,13 @@ const NAV_ITEMS: Array<NavItem> = [
         label: 'Explore',
         children: [
             {
+                label: 'Archive',
+                href: '/archive/1',
+            },
+            {
                 label: 'Ask AI (Account Required)',
                 href: '/ask',
             },
-            {
-                label: 'Archive',
-                href: '/archive/1',
-            }
         ],
     },
     {

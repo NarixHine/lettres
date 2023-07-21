@@ -1,5 +1,6 @@
 import { noto, raleway } from '@/lib/fonts'
 import './globals.css'
+import 'zenn-content-css'
 import { Providers } from './providers'
 import Navbar from '@/components/navbar'
 import { ClerkProvider } from '@clerk/nextjs'

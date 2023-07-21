@@ -1,5 +1,4 @@
 import Main from '@/components/main'
-import 'zenn-content-css'
 import Shelf from '@/components/shelf'
 import { getXataClient } from '@/lib/xata'
 import { includes } from '@xata.io/client'

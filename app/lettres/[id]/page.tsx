@@ -1,6 +1,5 @@
 import { getXataClient } from '@/lib/xata'
 import { notFound } from 'next/navigation'
-import 'zenn-content-css'
 import NextImage from 'next/image'
 import Main from '@/components/main'
 import Text from '@/components/chakra/text'

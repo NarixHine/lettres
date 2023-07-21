@@ -129,7 +129,7 @@ export default async function Home() {
       <br></br>
       <Box textAlign={'center'} borderBottom={'rgba(3, 102, 214, 0.3) double 6px'} my={3}>
         <Box className='animate-bounce'>
-          <Link href='/archive/1' fontSize={'3xl'} className='text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500'>Archive ➣</Link>
+          <Link href='/archive/1' fontSize={'3xl'} _hover={{ textDecoration: 'none' }} className='text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-500'>Archive ➣</Link>
         </Box>
       </Box>
 

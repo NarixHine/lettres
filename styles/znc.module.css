@@ -10,4 +10,9 @@
     .znc div {
         background-color: transparent !important;
     }
+
+    .znc th,
+    .znc td {
+        background-color: transparent !important;
+    }
 }

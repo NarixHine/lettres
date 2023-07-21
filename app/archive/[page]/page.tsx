@@ -3,7 +3,7 @@ import Pagination from '@/components/pagination'
 import Shelf from '@/components/shelf'
 import { getXataClient } from '@/lib/xata'
 
-const PAGE_SIZE = 8
+const PAGE_SIZE = 6
 
 async function getData(page: number) {
     const client = getXataClient()
