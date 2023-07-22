@@ -1,7 +1,7 @@
 import Form from '@/components/form'
+import logger from '@/lib/axiom'
 import { getXataClient } from '@/lib/xata'
 import { auth } from '@clerk/nextjs'
-import { log } from 'next-axiom'
 import { notFound } from 'next/navigation'
 
 async function getData(name: string) {
@@ -35,7 +35,7 @@ export default async function TagEditPage({ params }: { params: { name: string }
                 await client.db.tags.create(config)
             }
 
-            log.info(`Tag ${id ? 'Updated' : 'Created'}`, { new: config, uid: auth().userId })
+            logger.info(`Tag ${id ? 'Updated' : 'Created'}`, { new: config, uid: auth().userId })
         }
         const del = async () => {
             'use server'
@@ -44,7 +44,7 @@ export default async function TagEditPage({ params }: { params: { name: string }
             if (id) {
                 await client.db.tags.delete(id)
                 
-                log.info(`Tag Deleted`, { tag: { Tag }, uid: auth().userId })
+                logger.info(`Tag Deleted`, { tag: { Tag }, uid: auth().userId })
             }
         }
 

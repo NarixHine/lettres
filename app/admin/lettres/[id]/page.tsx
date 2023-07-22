@@ -1,7 +1,7 @@
 import Form from '@/components/form'
+import logger from '@/lib/axiom'
 import { getXataClient } from '@/lib/xata'
 import { auth } from '@clerk/nextjs'
-import { log } from 'next-axiom'
 import { notFound } from 'next/navigation'
 
 async function getData(id: string) {
@@ -34,7 +34,7 @@ export default async function LettresEditPage({ params }: { params: { id: string
             }
             await client.db.lettres.createOrUpdate(get('id'), config)
 
-            log.info('Lettres Updated', { new: { id: get('id'), config }, uid: auth().userId })
+            logger.info('Lettres Updated', { new: { id: get('id'), config }, uid: auth().userId })
         }
         const del = async () => {
             'use server'
@@ -42,7 +42,7 @@ export default async function LettresEditPage({ params }: { params: { id: string
             const client = getXataClient()
             await client.db.lettres.delete(id)
             
-            log.info('Lettres Deleted', { lettres, uid: auth().userId })
+            logger.info('Lettres Deleted', { lettres, uid: auth().userId })
         }
 
         return (<Form action={submit} view={id === 'new' ? undefined : `/lettres/${id}`} items={[{

@@ -1,7 +1,7 @@
 import Form from '@/components/form'
+import logger from '@/lib/axiom'
 import { getXataClient } from '@/lib/xata'
 import { auth } from '@clerk/nextjs'
-import { log } from 'next-axiom'
 
 async function getData() {
     const client = getXataClient()
@@ -50,7 +50,7 @@ export default async function AdminPage() {
             client.db.settings.update('layout', layout)
         ])
 
-        log.info('Settings Updated', { new: { home, layout }, uid: auth().userId })
+        logger.info('Settings Updated', { new: { home, layout }, uid: auth().userId })
     }
 
     return (<Form action={submit} view='/' items={[{

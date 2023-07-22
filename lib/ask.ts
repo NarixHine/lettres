@@ -11,7 +11,7 @@ export default function useAskXata() {
         setAnswer(undefined)
         setIsLoading(true)
 
-        void fetchEventSource(`/api/ask`, {
+        void fetchEventSource('/api/ask', {
             method: 'POST',
             body: JSON.stringify({ question }),
             headers: { 'Content-Type': 'application/json' },
