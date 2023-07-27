@@ -39,13 +39,13 @@ export default async function LettresPage({ params }: LettresParams) {
     if (lettres) {
         const { title, desc, cover, tags, body, cn, insider } = lettres
         if (!cn && headers().get('cf-ipcountry') === 'CN') {
-            return <ErrorPanel error={new Error('451 UNAVAILABLE IN CHINA')}></ErrorPanel>
+            return <ErrorPanel error={new Error('451 UNAVAILABLE FOR LEGAL REASONS')} desc='This Lettres is not available to visitors in **Mainland China** due to censorship or self-censorship.'></ErrorPanel>
         }
         if (insider) {
             if (auth().userId) {
                 const role = (await currentUser())?.publicMetadata.role
                 if (role !== 'insider' && role !== 'admin') {
-                    return <ErrorPanel error={new Error('403 FORBIDDEN')} desc={'You are viewing an *Insider Lettres*, which is not available to general visitors.'}></ErrorPanel>
+                    return <ErrorPanel error={new Error('403 FORBIDDEN')} desc={'You are viewing an *Insider Lettres*, which is not available to general visitors for the time being.'}></ErrorPanel>
                 }
             }
             else {

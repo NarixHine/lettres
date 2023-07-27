@@ -33,7 +33,7 @@ export default async function RootLayout({
 }) {
     const role = (await currentUser())?.publicMetadata.role
     if (role !== 'admin')
-        return <ErrorPanel error={new Error('403 FORBIDDEN')}></ErrorPanel>
+        return <ErrorPanel error={new Error('403 FORBIDDEN')} desc='Unauthorised. Admin access is required to edit contents.'></ErrorPanel>
 
     const { lettres, tags } = await getData()
 

@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root[data-theme=dark],
+[data-theme][data-theme=dark] {
+    .znc blockquote {
+        color: #9dacb7 !important;
+    }
+
+    .znc summary {
+        background-color: transparent !important;
+    }
+
+    .znc div {
+        background-color: transparent !important;
+    }
+
+    .znc th,
+    .znc td {
+        background-color: transparent !important;
+    }
+}
