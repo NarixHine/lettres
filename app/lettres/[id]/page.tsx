@@ -1,5 +1,5 @@
 import { getXataClient } from '@/lib/xata'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import NextImage from 'next/image'
 import Main from '@/components/main'
 import Text from '@/components/chakra/text'
@@ -9,6 +9,7 @@ import { Metadata } from 'next'
 import Markdown from '@/components/markdown'
 import { headers } from 'next/dist/client/components/headers'
 import ErrorPanel from '@/components/error'
+import { auth, currentUser } from '@clerk/nextjs'
 
 interface LettresParams {
     params: { id: string }
@@ -27,7 +28,7 @@ async function getData(id: string) {
     const data = await client
         .db
         .lettres
-        .select(['desc', 'title', 'tags', 'cover', 'xata.createdAt', 'body', 'cn'])
+        .select(['desc', 'title', 'tags', 'cover', 'xata.createdAt', 'body', 'cn', 'insider'])
         .filter({ id })
         .getFirst()
     return data
@@ -36,9 +37,21 @@ async function getData(id: string) {
 export default async function LettresPage({ params }: LettresParams) {
     const lettres = await getData(params.id)
     if (lettres) {
-        const { title, desc, cover, tags, body, cn } = lettres
-        if (!cn && headers().get('cf-ipcountry') === 'CN')
+        const { title, desc, cover, tags, body, cn, insider } = lettres
+        if (!cn && headers().get('cf-ipcountry') === 'CN') {
             return <ErrorPanel error={new Error('451 UNAVAILABLE IN CHINA')}></ErrorPanel>
+        }
+        if (insider) {
+            if (auth().userId) {
+                const role = (await currentUser())?.publicMetadata.role
+                if (role !== 'insider') {
+                    return <ErrorPanel error={new Error('403 FORBIDDEN\nYou are viewing an *Insider Lettres*, which is not available to general visitors.')}></ErrorPanel>
+                }
+            }
+            else {
+                return redirect('/auth/signin')
+            }
+        }
 
         return (<Main>
             {

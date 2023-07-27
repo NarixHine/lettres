@@ -15,7 +15,7 @@ export default function Footer({ info, logo }: {
                     <Image src={logo} alt='Logo' height={10}></Image>
                 </AbsoluteCenter>
             </Box>
-            <Box textAlign={'center'} opacity={0.6} fontSize={'sm'} my={5}>
+            <Box textAlign={'center'} opacity={0.6} fontSize={'sm'} my={4}>
                 <Markdown md={info}></Markdown>
             </Box>
         </>

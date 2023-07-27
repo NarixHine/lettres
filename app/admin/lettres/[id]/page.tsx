@@ -15,9 +15,9 @@ async function getData(id: string) {
 
 export default async function LettresEditPage({ params }: { params: { id: string } }) {
     const { id } = params
-    const lettres = id === 'new' ? { desc: '', pin: false, cover: '', title: '', tags: [], body: '', cn: true } : await getData(id)
+    const lettres = id === 'new' ? { desc: '', pin: false, cover: '', title: '', tags: [], body: '', cn: true, insider: false } : await getData(id)
     if (lettres) {
-        const { desc, pin, cover, title, tags, body, cn } = lettres
+        const { desc, pin, cover, title, tags, body, cn, insider } = lettres
         const submit = async (data: FormData) => {
             'use server'
 
@@ -25,12 +25,13 @@ export default async function LettresEditPage({ params }: { params: { id: string
             const client = getXataClient()
             const config = {
                 desc: get('desc'),
-                pin: get('pin') === 'on',
                 cover: get('cover'),
                 title: get('title'),
                 tags: get('tags').split(' '),
                 body: get('body'),
-                cn: get('cn') === 'on'
+                pin: get('pin') === 'on',
+                cn: get('cn') === 'on',
+                insider: get('insider') === 'on',
             }
             await client.db.lettres.createOrUpdate(get('id'), config)
 
@@ -41,7 +42,7 @@ export default async function LettresEditPage({ params }: { params: { id: string
 
             const client = getXataClient()
             await client.db.lettres.delete(id)
-            
+
             logger.info('Lettres Deleted', { lettres, uid: auth().userId })
         }
 
@@ -80,6 +81,10 @@ export default async function LettresEditPage({ params }: { params: { id: string
                 text: 'Availability in China',
                 name: 'cn',
                 value: cn
+            }, {
+                text: 'Insider',
+                name: 'insider',
+                value: insider
             }]}
             deleteAction={id === 'new' ? undefined : del}></Form>)
     }
