@@ -12,7 +12,6 @@ import Stack from '@/components/chakra/stack'
 import Link from '@/components/chakra/link'
 import { getXataClient } from '@/lib/xata'
 import HomeDesc from './description'
-import Misskey from './misskey'
 import { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -135,8 +134,8 @@ export default async function Home() {
 
       <br></br>
       <Box p={5} style={{ boxShadow: 'rgba(3, 102, 214, 0.3) 0px 0px 0px 3px' }}>
-        <Text textAlign={'center'} fontSize={'2xl'} color={'teal.500'}><Link href='https://misskey.cloud/@lettres' target='_blank'>Misskey ⧉</Link></Text>
-        <Misskey></Misskey>
+        <Text textAlign={'center'} fontSize={'2xl'} color={'teal.500'}><Link href='https://misskey.cloud/@lettres' target='_blank'>Messages ⧉</Link></Text>
+        <iframe src={'https://missbed.narix.link/timeline/misskey.cloud/9gwc5sdvr8'} allowTransparency height={248} width={'100%'} className='mx-auto my-6 px-3'></iframe>
       </Box>
     </Main >
   )

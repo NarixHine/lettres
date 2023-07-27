@@ -44,8 +44,8 @@ export default async function LettresPage({ params }: LettresParams) {
         if (insider) {
             if (auth().userId) {
                 const role = (await currentUser())?.publicMetadata.role
-                if (role !== 'insider') {
-                    return <ErrorPanel error={new Error('403 FORBIDDEN\nYou are viewing an *Insider Lettres*, which is not available to general visitors.')}></ErrorPanel>
+                if (role !== 'insider' && role !== 'admin') {
+                    return <ErrorPanel error={new Error('403 FORBIDDEN')} desc={'You are viewing an *Insider Lettres*, which is not available to general visitors.'}></ErrorPanel>
                 }
             }
             else {
